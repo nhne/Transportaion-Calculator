@@ -109,5 +109,5 @@ $(function(){
     $(".btn-group > .btn").on("click", function(){
         $(this).addClass('active').siblings().removeClass("active");
         onScoreArgumentChanged
-    });
+    }).eq(1).addClass("active");
 })
