@@ -44,21 +44,24 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>나의 선호도는?</h1>
+        출발지<input name=starting>
+        도착지<input name=destination>
+        선호도
         <div class="btn-group" id="method-selector">
-          <button type="button" class="btn btn-primary">시간</button>
-          <button type="button" class="btn btn-primary">균형</button>
-          <button type="button" class="btn btn-primary">비용</button>
+          <button type="button" class="btn btn-primary" onclick="setMethod(0)">시간</button>
+          <button type="button" class="btn btn-primary" onclick="setMethod(1)">균형</button>
+          <button type="button" class="btn btn-primary" onclick="setMethod(2)">비용</button>
+        </div>
       </div>
-      <button class="btn btn-primary" onclick="makePanel()">새로 만들기</button>
+      <hr/>
       <div id="panel-holder"></div>
-      <div class="panel-wrapper panel-adder" onclick="addPanelHolder()">
-        <H2>새 루트 추가</H2>
+      <div class="panel panel-adder" onclick="addPanelHolder()">
+        <H2>+ 새 루트 추가</H2>
       </div>
 
     </div><!-- /.container -->
     <footer class="footer">
-      All rights of map data and routing data belongs to <a href="http://map.daum.net">Daum Corp</a>.
+      copyright nhne.
     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

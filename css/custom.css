@@ -1,14 +1,15 @@
 .panel-wrapper{
-    margin: 40px;
-    padding: 25px;
+    margin: 40px 0px;
+    padding: 20px;
     background-color: #eedda5
 }
 
 .panel-adder{
   cursor: pointer;
   text-align: center;
+  vertical-align: center;
   background-color: transparent;
-  border: #eedda5, solid, 15px;
+  border: 4px dashed #eedda5;
 }
 
 .score{
@@ -24,6 +25,24 @@
   width: 120px;
 }
 
+.ticketbox{
+  height: 20px;
+  /*background-color: #080;*/
+}
+
+.x-wrapper{
+  float: right;
+}
+
+.course{
+  height: 45px;
+  padding: 10px 0px;
+}
+
+.course-add-panel{
+  text-align: center;
+  font-weight: bolder;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

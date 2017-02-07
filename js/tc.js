@@ -5,15 +5,15 @@ var routeSize = 0;
 var calcMethod = mHarmony;
 
 function mTimeFirst(time, cost){
-    return Math.pow(time, 0.8) + cost;
+    return parseInt(Math.pow(time, 0.8)) * cost;
 }
 
 function mHarmony(time, cost){
-    return time + cost;
+    return parseInt(time) * cost;
 }
 
 function mCostFirst(time, cost){
-    return time + Math.pow(cost, 0.8);
+    return time * parseInt(Math.pow(cost, 0.8));
 }
 
 function setMethod(num){
@@ -26,28 +26,56 @@ function setMethod(num){
     else{
         calcMethod = mHarmony;
     }
+    onScoreArgumentChanged();
 }
 
-function onScoreArgumentChanged(event){
-    var target = $("#panel" + event.data.id);
-    var c = target.find("input[name=time]").val() * target.find("input[name=cost]").val();
-    if(!isNaN(c)){
-        target.find(".score").text("점수:" + c);
-    }
+function onScoreArgumentChanged(){
+    console.log("calculating...");
+    var a = $(".panel-wrapper");
+    a.each(function(){
+        var element = $(this);
+        var sum = 0;
+        var inputt = element.find("input[name=time]");
+        var inputc = element.find("input[name=cost]");
+        for(var i = 0; i < inputt.length; i++){
+            sum += calcMethod(inputt.eq(i).val(), inputc.eq(i).val())
+        }
+        $(element).find(".score").text(sum + "점");
+    });
+}
+
+function onDestinationChanged(){
+
+}
+
+function onStartChanged(){
+
 }
 
 function addPanelHolder(){
-    var newdiv = $("<div>").addClass("panel panel-wrapper row").attr("id", "panel" + routeSize);
-    $("<div>").addClass("x-wrapper").append("<span>X</span>").appendTo(newdiv);
-    makePanel(newdiv);
-    $("<div>").addClass("col-md-10 clickable").text("경유 추가").click(function(){
-        makePanel(newdiv);
-    }).appendTo(newdiv);
+    var template = '<div class="panel panel-wrapper">' +
+        '   <div class="ticketbox"><span class="x-wrapper clickable">X</span></div>' + 
+        '       <div class="row">' +
+        '       <div class="course-container col-md-10">' + 
+        '           <div class="course-add-panel course clickable">+경유지 추가</div>' +
+        '       </div>' +
+        '       <div class="score col-md-2">0점</div>' +
+        '   </div>'
+        '</div>';
+    //$("#panel-holder").append(template);
+    var newdiv = $(template).attr("id", "panel" + routeSize);
+    makeRoute(newdiv);
+    newdiv.find(".course-add-panel").click(function(){
+        makeRoute(newdiv);
+    });
+    newdiv.find(".x-wrapper").click(function(){
+        newdiv.remove();
+    })
     newdiv.appendTo("#panel-holder");
     routeSize += 1;
 }
 
-function makePanel(caller){
+function makeRoute(caller){
     var trans_type_template = 
         "<select></select>";
     var start_end_template =
@@ -59,20 +87,24 @@ function makePanel(caller){
     var trans_types = [
             "KTX", "SRT", "버스", "지하철", "택시", "다리", "기타"
     ]
-    var newdiv = caller;
+    var newdiv = $("<div>").addClass("row course");
     $("<div>").addClass("w-100").appendTo(newdiv);
     $("<div>").html(trans_type_template).addClass("col-md-2").appendTo(newdiv);
-    $("<div>").html(start_end_template).addClass("col-md-3").appendTo(newdiv);
+    $("<div>").html(start_end_template).addClass("col-md-5").appendTo(newdiv);
     $("<div>").html(cost_and_time_template).change({id: caller.id}, onScoreArgumentChanged)
         .addClass("col-md-5").appendTo(newdiv);
-    $("<div>").addClass("col-md-3 score").appendTo(newdiv);
     trans_types.forEach(function(entry){
         $("<option>").val(entry).text(entry).appendTo(newdiv.find("select"));
     }, this);
+    newdiv.prependTo(caller.find(".course-container"));
 }
 
 
 //script when document loaded
 $(function(){
     $.support.cors = true;
+    $(".btn-group > .btn").on("click", function(){
+        $(this).addClass('active').siblings().removeClass("active");
+        onScoreArgumentChanged
+    });
 })
