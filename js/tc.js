@@ -9,7 +9,7 @@ function mTimeFirst(time, cost){
 }
 
 function mHarmony(time, cost){
-    return parseInt(time) * cost;
+    return time * cost;
 }
 
 function mCostFirst(time, cost){
@@ -34,13 +34,16 @@ function onScoreArgumentChanged(){
     var a = $(".panel-wrapper");
     a.each(function(){
         var element = $(this);
-        var sum = 0;
+        var sumt = 0;
+        var sumc = 0;
         var inputt = element.find("input[name=time]");
         var inputc = element.find("input[name=cost]");
         for(var i = 0; i < inputt.length; i++){
-            sum += calcMethod(inputt.eq(i).val(), inputc.eq(i).val())
+            sumt += parseInt(inputt.eq(i).val());
+            sumc += parseInt(inputc.eq(i).val());
         }
-        $(element).find(".score").text(sum + "점");
+        $(element).find(".score")
+            .text(calcMethod(sumt, sumc).toLocaleString('ko'));
     });
 }
 
@@ -59,7 +62,7 @@ function addPanelHolder(){
         '       <div class="course-container col-md-10">' + 
         '           <div class="course-add-panel course clickable">+경유지 추가</div>' +
         '       </div>' +
-        '       <div class="score col-md-2">0점</div>' +
+        '       <div class="score-wrapper col-md-2"><span class="score">0</span>점</div>' +
         '   </div>'
         '</div>';
     //$("#panel-holder").append(template);
