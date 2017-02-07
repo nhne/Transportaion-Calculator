@@ -44,13 +44,18 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>나의 선호도는?</h1>
+        <div class="btn-group" id="method-selector">
+          <button type="button" class="btn btn-primary">시간</button>
+          <button type="button" class="btn btn-primary">균형</button>
+          <button type="button" class="btn btn-primary">비용</button>
       </div>
       <button class="btn btn-primary" onclick="makePanel()">새로 만들기</button>
-      <div id="panel-holder">
-          
+      <div id="panel-holder"></div>
+      <div class="panel-wrapper panel-adder" onclick="addPanelHolder()">
+        <H2>새 루트 추가</H2>
       </div>
+
     </div><!-- /.container -->
     <footer class="footer">
       All rights of map data and routing data belongs to <a href="http://map.daum.net">Daum Corp</a>.
@@ -62,5 +67,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- custom JavaScript -->
     <script src="js/tc.js"></script>
+    <script src="js/gdirection.js"></script>
   </body>
 </html>

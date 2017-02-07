@@ -1,13 +1,27 @@
-.panelWrapper{
+.panel-wrapper{
     margin: 40px;
     padding: 25px;
     background-color: #eedda5
 }
 
+.panel-adder{
+  cursor: pointer;
+  text-align: center;
+  background-color: transparent;
+  border: #eedda5, solid, 15px;
+}
+
 .score{
     font-weight: bolder;
     font-size: large;
-    font-color: lightgray;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+.panel-wrapper input{
+  width: 120px;
 }
 
 /* Sticky footer styles
